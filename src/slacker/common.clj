@@ -8,14 +8,3 @@
   ^{:doc "Timeout for synchronouse call."
     :dynamic true}
   *timeout* 10000)
-
-
-(def
-  ^{:doc "Initial Kryo ObjectBuffer size (bytes)."
-    :dynamic true}
-  *ob-init* (* 1024 1))
-
-(def
-  ^{:doc "Maximum Kryo ObjectBuffer size (bytes)."
-    :dynamic true}
-  *ob-max* (* 1024 16))

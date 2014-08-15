@@ -3,16 +3,6 @@
   (:use clojure.test)
   (:import [java.util Arrays]))
 
-(deftest test-serialization
-  (are [data] (is (= data (deserialize :carb
-                                       (serialize :carb data))))
-       [1 2 3]
-       {:a 1 :b 2}
-       #{1 2 3}
-       "hello"
-       :world
-       87742))
-
 (deftest test-json-serialization
   (are [data] (is (= data (deserialize :json
                                        (serialize :json data))))
@@ -85,11 +75,11 @@
        87742))
 
 (deftest test-compression
-  (are [data] (is (= data (deserialize :deflate-carb
-                                       (serialize :deflate-carb data))))
+  (are [data] (is (= data (deserialize :deflate-json
+                                       (serialize :deflate-json data))))
        [1 2 3]
        {:a 1 :b 2}
-       #{1 2 3}
+;;       #{1 2 3}
        "hello"
-       :world
+;;       :world
        87742))

@@ -4,25 +4,25 @@
   (:use [clojure.string :only [split]]))
 
 (def funcs {"plus" + "minus" - "prod" * "div" /})
-(def params (serialize :carb [100 0]))
+(def params (serialize :nippy [100 0]))
 
 (deftest test-server-pipeline
   (let [server-pipeline (build-server-pipeline
                          funcs {:pre identity :before identity :after identity :post identity})
-        req {:content-type :carb
+        req {:content-type :nippy
              :data params
              :fname "plus"}
-        req2 {:content-type :carb
+        req2 {:content-type :nippy
               :data params
               :fname "never-found"}
-        req3 {:content-type :carb
+        req3 {:content-type :nippy
               :data params
               :fname "div"}]
 
     (.rewind params)
     (let [result (server-pipeline req)]
       (is (= :success (:code result)))
-      (is (= 100 (deserialize :carb (:result result)))))
+      (is (= 100 (deserialize :nippy (:result result)))))
 
     (.rewind params)
     (let [result (server-pipeline req2)]
@@ -37,11 +37,11 @@
 (deftest test-server-pipeline-interceptors
   (let [server-pipeline (build-server-pipeline
                          funcs {:pre identity :before identity :after interceptor :post identity})
-        req {:content-type :carb
+        req {:content-type :nippy
              :data params
              :fname "prod"}]
     (.rewind params)
-    (is (= "0" (deserialize :carb (:result (server-pipeline req)))))))
+    (is (= "0" (deserialize :nippy (:result (server-pipeline req)))))))
 
 (deftest test-ping
   (let [request [version 0 [:type-ping]]

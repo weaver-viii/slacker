@@ -1,8 +1,7 @@
 (ns slacker.serialization
   (:use [slacker common])
-  (:use [slacker.serialization carbonite nippy])
+  (:use [slacker.serialization nippy])
   (:use [clojure.java.io :only [copy]])
-  (:require [carbonite.api :as carb])
   (:require [cheshire.core :as json])
   (:require [clojure.edn :as edn])
   (:require [taoensso.nippy :as nippy])
@@ -26,20 +25,6 @@
   matched serialization function"
   (fn [f _ & _] (if (.startsWith (name f) "deflate")
                  :deflate f)))
-
-(defmethod deserialize :carb
-  ([_ data] (deserialize :carb data :buffer))
-  ([_ data it]
-     (if (= it :buffer)
-       (carb/read-buffer @carb-registry data)
-       (deserialize :carb (ByteBuffer/wrap data) :buffer))))
-
-(defmethod serialize :carb
-  ([_ data] (serialize :carb data :buffer))
-  ([_ data ot]
-     (if (= ot :bytes)
-       (carb/write-buffer @carb-registry data *ob-init* *ob-max*)
-       (ByteBuffer/wrap (serialize :carb data :bytes)))))
 
 (defmethod deserialize :json
   ([_ data] (deserialize :json data :buffer))
