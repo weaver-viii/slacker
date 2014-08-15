@@ -131,13 +131,12 @@ You need to check (nil? error) because reading the result. Also note
 that doing blocking tasks in callback function could ruin system
 performance.
 
-#### Serialiation
+#### Serialization
 
-As of 0.12, slacker is still using
-[carbonite (my fork)](https://github.com/sunng87/carbonite) by default
-to generate a binary format of data for exchange. I will switch to
-Peter Taoussanis's [nippy](https://github.com/ptaoussanis/nippy) in
-next release.
+Since 0.13, slacker is using
+[nippy](https://github.com/ptaoussanis/nippy) as default serializer,
+carbonite support is now dropped. If you need to use carbonite anyway,
+please stick to 0.12.x.
 
 ##### Serializing custom types
 
