@@ -7,7 +7,8 @@
                  [link "0.6.14"]
                  [cheshire "5.3.1"]
                  [org.clojure/tools.logging "0.3.0"]
-                 [com.taoensso/nippy "2.7.0-alpha1"]]
+                 [com.taoensso/nippy "2.7.0-alpha1"
+                  :exclusions [org.clojure/clojure]]]
   :profiles {:example {:source-paths ["examples"]
                        :dependencies [[org.clojure/java.jmx "0.2.0"]]}}
   :plugins [[lein-exec "0.3.1"]
