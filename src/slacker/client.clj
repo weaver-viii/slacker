@@ -2,7 +2,7 @@
   (:use [slacker common])
   (:use [slacker.client common])
   (:use [clojure.string :only [split]])
-  (:use [link.tcp :only [stop-clients]]))
+  (:require [link.tcp :refer [stop-clients]]))
 
 (defonce cached-slacker-client-factory
   (delay (create-client-factory nil)))
